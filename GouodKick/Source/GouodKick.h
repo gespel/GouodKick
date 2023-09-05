@@ -15,18 +15,21 @@ class GouodKick {
 public:
     GouodKick(int sampleRate, int bufferSize);
     void processBuffer(juce::AudioBuffer<float> buffer);
+    void setFilterFactor(float filterFactor);
 private:
     int sampleRate;
     int bufferSize;
+	float filterFactor;
 
-    juce::dsp::IIR::Filter<float> filterL11;
-    juce::dsp::IIR::Filter<float> filterL12;
-    juce::dsp::IIR::Filter<float> filterR11;
-    juce::dsp::IIR::Filter<float> filterR12;
+    juce::dsp::IIR::Filter<float> filterLowL1;
+    juce::dsp::IIR::Filter<float> filterLowL2;
+    juce::dsp::IIR::Filter<float> filterLowR1;
+    juce::dsp::IIR::Filter<float> filterLowR2;
 
-    juce::dsp::IIR::Filter<float> filterL21;
-    juce::dsp::IIR::Filter<float> filterL22;
-    juce::dsp::IIR::Filter<float> filterR21;
-    juce::dsp::IIR::Filter<float> filterR22;
+    juce::dsp::IIR::Filter<float> filterHighL1;
+    juce::dsp::IIR::Filter<float> filterHighL2;
+    juce::dsp::IIR::Filter<float> filterHighR1;
+    juce::dsp::IIR::Filter<float> filterHighR2;
 
+    void setupFilter();
 };
