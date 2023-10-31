@@ -85,8 +85,8 @@ void GouodKick::processBuffer(juce::AudioBuffer<float> buffer) {
         ebHighInL[sample] = 2 / 3.14159265359 * atan(ebHighInL[sample] * this->highGain);
         ebHighInR[sample] = 2 / 3.14159265359 * atan(ebHighInR[sample] * this->highGain);
 
-        channelOutputL[sample] = (channelInputL[sample] + (ebLowOutL[sample] + ebHighOutL[sample]) / 2) / 2;
-        channelOutputR[sample] = (channelInputR[sample] + (ebLowOutR[sample] + ebHighOutR[sample]) / 2) / 2;
+        channelOutputL[sample] = (/*channelInputL[sample] + */(ebLowOutL[sample] + ebHighOutL[sample]) / 2) / 2;
+        channelOutputR[sample] = (/*channelInputR[sample] + */(ebLowOutR[sample] + ebHighOutR[sample]) / 2) / 2;
     }
 }
 
@@ -100,13 +100,13 @@ void GouodKick::setupFilter() {
     this->filterHighR1.reset();
     this->filterHighR2.reset();
 
-    this->filterLowL1.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(this->sampleRate, 100.0 * this->filterFactor);
-    this->filterLowL2.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(this->sampleRate, 20.0 * this->filterFactor);
-    this->filterLowR1.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(this->sampleRate, 100.0 * this->filterFactor);
-    this->filterLowR2.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(this->sampleRate, 20.0 * this->filterFactor);
+    this->filterLowL1.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(this->sampleRate, 100.0 * this->lowFilterFactor);
+    this->filterLowL2.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(this->sampleRate, 20.0 * this->lowFilterFactor);
+    this->filterLowR1.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(this->sampleRate, 100.0 * this->lowFilterFactor);
+    this->filterLowR2.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(this->sampleRate, 20.0 * this->lowFilterFactor);
 
-    this->filterHighL1.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(this->sampleRate, 8000 * this->filterFactor);
-    this->filterHighL2.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(this->sampleRate, 1000.0 * this->filterFactor);
-    this->filterHighR1.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(this->sampleRate, 8000 * this->filterFactor);
-    this->filterHighR2.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(this->sampleRate, 1000.0 * this->filterFactor);
+    this->filterHighL1.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(this->sampleRate, 8000 * this->highFilterFactor);
+    this->filterHighL2.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(this->sampleRate, 1000.0 * this->highFilterFactor);
+    this->filterHighR1.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(this->sampleRate, 8000 * this->highFilterFactor);
+    this->filterHighR2.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(this->sampleRate, 1000.0 * this->highFilterFactor);
 }

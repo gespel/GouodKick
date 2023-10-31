@@ -18,31 +18,31 @@ GouodKickAudioProcessorEditor::GouodKickAudioProcessorEditor (GouodKickAudioProc
     setSize (500, 300);
 
     highFrequencySlider.setSliderStyle(juce::Slider::SliderStyle::LinearBarVertical);
-    highFrequencySlider.setRange(0.0, 100.0, 0.1);
+    highFrequencySlider.setRange(0.0, 2.0, 0.1);
     highFrequencySlider.setTextValueSuffix(" High Part");
     highFrequencySlider.setValue(1.0f);
-    //highFrequencySlider.addListener(this);
+    highFrequencySlider.addListener(this);
     addAndMakeVisible(&highFrequencySlider);
 
     lowFrequencySlider.setSliderStyle(juce::Slider::SliderStyle::LinearBarVertical);
-    lowFrequencySlider.setRange(0.0, 100.0, 0.1);
+    lowFrequencySlider.setRange(0.0, 3.0, 0.1);
     lowFrequencySlider.setTextValueSuffix(" Low Part");
     lowFrequencySlider.setValue(1.0f);
-    //lowFrequencySlider.addListener(this);
+    lowFrequencySlider.addListener(this);
     addAndMakeVisible(&lowFrequencySlider);
 
     lowGainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearBarVertical);
     lowGainSlider.setRange(0.0, 100.0, 0.1);
     lowGainSlider.setTextValueSuffix(" Low Gain");
     lowGainSlider.setValue(1.0f);
-    //lowGainSlider.addListener(this);
+    lowGainSlider.addListener(this);
     addAndMakeVisible(&lowGainSlider);
 
     highGainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearBarVertical);
     highGainSlider.setRange(0.0, 100.0, 0.1);
     highGainSlider.setTextValueSuffix(" High Gain");
     highGainSlider.setValue(1.0f);
-    //highGainSlider.addListener(this);
+    highGainSlider.addListener(this);
     addAndMakeVisible(&highGainSlider);
 
 }
@@ -68,10 +68,10 @@ void GouodKickAudioProcessorEditor::resized()
     const int dialWidth = getWidth() / 2 - border;
     const int dialHight = getHeight() - border - 100;
 
-    highFrequencySlider.setBounds(border, border, 100, 50);
-    lowFrequencySlider.setBounds(2 * border + 100, border, 100, 50);
-    lowGainSlider.setBounds(3 * border + 2 * 100, border, 100, 50);
-    highGainSlider.setBounds(4 * border + 3 * 100, border, 100, 50);
+    highFrequencySlider.setBounds(border, border, 100, 260);
+    lowFrequencySlider.setBounds(2 * border + 100, border, 100, 260);
+    lowGainSlider.setBounds(3 * border + 2 * 100, border, 100, 260);
+    highGainSlider.setBounds(4 * border + 3 * 100, border, 100, 260);
 }
 
 void GouodKickAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) {
