@@ -15,12 +15,15 @@ class GouodKick {
 public:
     GouodKick(int sampleRate, int bufferSize);
     void processBuffer(juce::AudioBuffer<float> buffer);
-    void setFilterFactor(float filterFactor);
+    void setLowFilterFactor(float filterFactor);
+    void setHighFilterFactor(float filterFactor);
+    void setLowGain(float gain);
+    void setHighGain(float gain);
+
 private:
     int sampleRate;
     int bufferSize;
-	float filterFactor;
-
+	
     juce::dsp::IIR::Filter<float> filterLowL1;
     juce::dsp::IIR::Filter<float> filterLowL2;
     juce::dsp::IIR::Filter<float> filterLowR1;
@@ -31,5 +34,11 @@ private:
     juce::dsp::IIR::Filter<float> filterHighR1;
     juce::dsp::IIR::Filter<float> filterHighR2;
 
+    float lowGain = 1.0f;
+    float highGain = 1.0f;
+    float lowFilterFactor = 1.0f;
+    float highFilterFactor = 1.0f;
+
     void setupFilter();
+
 };

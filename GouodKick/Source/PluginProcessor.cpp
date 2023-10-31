@@ -165,6 +165,14 @@ void GouodKickAudioProcessor::setStateInformation (const void* data, int sizeInB
     // whose contents will have been created by the getStateInformation() call.
 }
 
+void GouodKickAudioProcessor::updateParameters(float lowFilterFactor, float highFilterFactor, float lowGain, float highGain) {
+    gk->setLowFilterFactor(lowFilterFactor);
+    gk->setHighFilterFactor(highFilterFactor);
+    gk->setLowGain(lowGain);
+    gk->setHighGain(highGain);
+}
+
+
 //==============================================================================
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()

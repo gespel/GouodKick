@@ -17,25 +17,45 @@ GouodKick::GouodKick(int sampleRate, int bufferSize) {
     this->setupFilter();
 }
 
-void GouodKick::setFilterFactor(float filterFactor) {
-	this->filterFactor = filterFactor;
+void GouodKick::setLowFilterFactor(float filterFactor) {
+	this->lowFilterFactor = filterFactor;
+    this->setupFilter();
+}
+
+void GouodKick::setHighFilterFactor(float filterFactor) {
+    this->highFilterFactor = filterFactor;
+    this->setupFilter();
+}
+
+void GouodKick::setLowGain(float gain) {
+    this->lowGain = gain;
+}
+
+void GouodKick::setHighGain(float gain) {
+    this->highGain = gain;
 }
 
 void GouodKick::processBuffer(juce::AudioBuffer<float> buffer) {
     auto* channelInputL = buffer.getReadPointer(0);
     auto* channelInputR = buffer.getReadPointer(1);
 
+
+    // ------ Setting up the low frequency buffer
     juce::AudioBuffer<float> effectBufferLow(2, this->bufferSize);
     auto* ebLowInL = effectBufferLow.getWritePointer(0);
     auto* ebLowInR = effectBufferLow.getWritePointer(1);
     auto* ebLowOutL = effectBufferLow.getReadPointer(0);
     auto* ebLowOutR = effectBufferLow.getReadPointer(1);
+    // ------------------------------------------
 
+    // ------ Setting up the high frequency buffer
     juce::AudioBuffer<float> effectBufferHigh(2, this->bufferSize);
     auto* ebHighInL = effectBufferHigh.getWritePointer(0);
     auto* ebHighInR = effectBufferHigh.getWritePointer(1);
     auto* ebHighOutL = effectBufferHigh.getReadPointer(0);
     auto* ebHighOutR = effectBufferHigh.getReadPointer(1);
+    // ------------------------------------------
+
 
     auto* channelOutputL = buffer.getWritePointer(0);
     auto* channelOutputR = buffer.getWritePointer(1);
@@ -53,8 +73,8 @@ void GouodKick::processBuffer(juce::AudioBuffer<float> buffer) {
         ebLowInR[sample] = filterLowR1.processSample(ebLowInL[sample]);
         ebLowInR[sample] = filterLowR2.processSample(ebLowInL[sample]);
 
-        ebLowInL[sample] = 2 / 3.14159265359 * atan(ebLowInL[sample] * 100);
-        ebLowInR[sample] = 2 / 3.14159265359 * atan(ebLowInR[sample] * 100);
+        ebLowInL[sample] = 2 / 3.14159265359 * atan(ebLowInL[sample] * this->lowGain);
+        ebLowInR[sample] = 2 / 3.14159265359 * atan(ebLowInR[sample] * this->lowGain);
 
 
         ebHighInL[sample] = filterHighL1.processSample(ebHighInL[sample]);
@@ -62,8 +82,8 @@ void GouodKick::processBuffer(juce::AudioBuffer<float> buffer) {
         ebHighInR[sample] = filterHighR1.processSample(ebHighInR[sample]);
         ebHighInR[sample] = filterHighR2.processSample(ebHighInR[sample]);
 
-        ebHighInL[sample] = 2 / 3.14159265359 * atan(ebHighInL[sample] * 100);
-        ebHighInR[sample] = 2 / 3.14159265359 * atan(ebHighInR[sample] * 100);
+        ebHighInL[sample] = 2 / 3.14159265359 * atan(ebHighInL[sample] * this->highGain);
+        ebHighInR[sample] = 2 / 3.14159265359 * atan(ebHighInR[sample] * this->highGain);
 
         channelOutputL[sample] = (channelInputL[sample] + (ebLowOutL[sample] + ebHighOutL[sample]) / 2) / 2;
         channelOutputR[sample] = (channelInputR[sample] + (ebLowOutR[sample] + ebHighOutR[sample]) / 2) / 2;
