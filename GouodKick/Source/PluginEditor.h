@@ -32,7 +32,7 @@ public:
         //200 - 50 / 2 + 50 = 125
         //100 - 20 / 2 + 20 = 60 
 
-        // 60 - 20 / 100 - 20
+        // 60 - 20 / 100 - 20a
         if(mid < (sliderPos - minSliderPos)/(maxSliderPos - minSliderPos) * height) {
             g.setColour(juce::Colours::grey);
             g.fillRect(x + 20 * 1.0, y + (height/2) * 1.0, 10 * 1.0, (sliderPos - minSliderPos)/(maxSliderPos - minSliderPos) * height * 0.5f);
