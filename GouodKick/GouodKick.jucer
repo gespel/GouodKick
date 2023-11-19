@@ -17,9 +17,17 @@
             file="Source/PluginProcessor.h"/>
     </GROUP>
     <GROUP id="{83AFE619-7F9B-5869-EC28-BBB9FB757DBF}" name="Resources">
-      <FILE id="vCK35n" name="KICKTATOR_V2_BG.png" compile="0" resource="1"
+      <FILE id="yNZkf0" name="KNOB_V6.png" compile="0" resource="1" file="KNOB_V6.png"/>
+      <FILE id="mnLx1y" name="KICKTATOR_V2_BG.png" compile="0" resource="1"
             file="KICKTATOR_V2_BG.png"/>
-      <FILE id="IWu4Qh" name="FADER_SHADOW.png" compile="0" resource="1"
+      <FILE id="sPrAFF" name="KICKTATOR_V3_BG.png" compile="0" resource="1"
+            file="KICKTATOR_V3_BG.png"/>
+      <FILE id="zzvtl7" name="KICKTATOR_V4_BG.png" compile="0" resource="1"
+            file="KICKTATOR_V4_BG.png"/>
+      <FILE id="BFz0U7" name="KNOB_V3.png" compile="0" resource="1" file="KNOB_V3.png"/>
+      <FILE id="izUueh" name="KNOB_V4.png" compile="0" resource="1" file="KNOB_V4.png"/>
+      <FILE id="NAThOp" name="KNOB_V5.png" compile="0" resource="1" file="KNOB_V5.png"/>
+      <FILE id="WXG4WJ" name="FADER_SHADOW.png" compile="0" resource="1"
             file="FADER_SHADOW.png"/>
     </GROUP>
   </MAINGROUP>
