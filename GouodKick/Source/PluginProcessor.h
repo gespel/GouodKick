@@ -57,7 +57,7 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    void updateParameters(float lowFilterFactor, float highFilterFactor, float lowGain, float highGain);
+    void updateParameters(float lowFilterFactor, float highFilterFactor, float lowGain, float highGain, float gain, int dw);
 
 private:
     GouodKick* gk;

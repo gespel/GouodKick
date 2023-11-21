@@ -85,8 +85,8 @@ void GouodKick::processBuffer(juce::AudioBuffer<float> buffer) {
         ebHighInL[sample] = 2 / 3.14159265359 * atan(ebHighInL[sample] * this->highGain);
         ebHighInR[sample] = 2 / 3.14159265359 * atan(ebHighInR[sample] * this->highGain);
 
-        channelOutputL[sample] = (/*channelInputL[sample] + */(ebLowOutL[sample] + ebHighOutL[sample]) / 2) / 2;
-        channelOutputR[sample] = (/*channelInputR[sample] + */(ebLowOutR[sample] + ebHighOutR[sample]) / 2) / 2;
+        channelOutputL[sample] = ((this->dryWet/100) * channelInputL[sample] + ((1 - this->dryWet/100) * ((ebLowOutL[sample] + ebHighOutL[sample]) / 2))) * this->outGain;
+        channelOutputR[sample] = ((this->dryWet/100) * channelInputR[sample] + ((1 - this->dryWet/100) * ((ebLowOutR[sample] + ebHighOutR[sample]) / 2))) * this->outGain;
     }
 }
 
@@ -109,4 +109,12 @@ void GouodKick::setupFilter() {
     this->filterHighL2.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(this->sampleRate, 1000.0 * this->highFilterFactor);
     this->filterHighR1.coefficients = juce::dsp::IIR::Coefficients<float>::makeLowPass(this->sampleRate, 8000 * this->highFilterFactor);
     this->filterHighR2.coefficients = juce::dsp::IIR::Coefficients<float>::makeHighPass(this->sampleRate, 1000.0 * this->highFilterFactor);
+}
+
+void GouodKick::setOutGain(float gain) {
+    this->outGain = gain;
+}
+
+void GouodKick::setDryWet(int dw) {
+    this->dryWet = dw;
 }

@@ -8,8 +8,14 @@
 
 namespace BinaryData
 {
+    extern const char*   KICKTATOR_V6_BG_png;
+    const int            KICKTATOR_V6_BG_pngSize = 68677;
+
     extern const char*   KNOB_V6_png;
     const int            KNOB_V6_pngSize = 8747;
+
+    extern const char*   KICKTATOR_V5_BG_png;
+    const int            KICKTATOR_V5_BG_pngSize = 73850;
 
     extern const char*   KICKTATOR_V2_BG_png;
     const int            KICKTATOR_V2_BG_pngSize = 60103;
@@ -29,11 +35,23 @@ namespace BinaryData
     extern const char*   KNOB_V5_png;
     const int            KNOB_V5_pngSize = 6735;
 
+    extern const char*   KNOB_V9_png;
+    const int            KNOB_V9_pngSize = 8466;
+
     extern const char*   FADER_SHADOW_png;
     const int            FADER_SHADOW_pngSize = 11258;
 
+    extern const char*   KNOB_V7_png;
+    const int            KNOB_V7_pngSize = 5500;
+
+    extern const char*   KNOB_V8_png;
+    const int            KNOB_V8_pngSize = 612;
+
+    extern const char*   KNOB_V10_png;
+    const int            KNOB_V10_pngSize = 8207;
+
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 8;
+    const int namedResourceListSize = 14;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

@@ -30,7 +30,7 @@ public:
 
 
     void drawRotarySlider (Graphics& g, int x, int y, int width, int height, float sliderPos, const float rotaryStartAngle, const float rotaryEndAngle, Slider& slider) override {
-        Image knob = ImageCache::getFromMemory(BinaryData::KNOB_V6_png, BinaryData::KNOB_V6_pngSize);
+        Image knob = ImageCache::getFromMemory(BinaryData::KNOB_V10_png, BinaryData::KNOB_V10_pngSize);
         int radius = jmin(width, height);
         int centreX = int(width / 2);
         int centreY = int(height / 2) + 5;
@@ -56,12 +56,11 @@ public:
         std::cout << "SliderPos: " << sliderPos << " MinSliderPos: " << minSliderPos << " MaxSliderPos: " << maxSliderPos << std::endl;
         if(mid < sliderPos) {
             g.setColour(juce::Colours::grey);
-            g.fillRect(x + 19.0f, y + (height/2.0f), 7.0f, (sliderPos-mid) * 0.85);
-            
+            g.fillRect(x + 19.0f, y + 15.0f + (height/2.0f) * 0.85, 6.0f, 15.0f + (sliderPos-mid) * 0.85);            
         }
         else {
             g.setColour(juce::Colours::grey);
-            g.fillRect(x + 19.0f, sliderPos  * 0.85, 7.f, (mid-sliderPos) * 0.85);
+            g.fillRect(x + 19.0f, 15.f + sliderPos * 0.85, 6.f, 15.0f + (mid-sliderPos) * 0.85);
         }
         g.drawImageAt (sliderKnob.rescaled(sliderKnob.getWidth()/4, sliderKnob.getHeight()/4, Graphics::mediumResamplingQuality), x, (y + sliderPos - 5) * 0.85);
     }

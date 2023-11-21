@@ -16,7 +16,7 @@ GouodKickAudioProcessorEditor::GouodKickAudioProcessorEditor (GouodKickAudioProc
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (472, 713);
+    setSize (472, 670);
     setLookAndFeel(&gouodKickLookAndFeel);
 
     highFrequencySlider.setSliderStyle(juce::Slider::SliderStyle::LinearBarVertical);
@@ -76,17 +76,22 @@ void GouodKickAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-    Image background = ImageCache::getFromMemory (BinaryData::KICKTATOR_V4_BG_png, BinaryData::KICKTATOR_V4_BG_pngSize);
+    Image background = ImageCache::getFromMemory (BinaryData::KICKTATOR_V6_BG_png, BinaryData::KICKTATOR_V6_BG_pngSize);
     g.drawImageAt (background, 0, 0);
 
     g.setColour (juce::Colours::white);
     g.setFont (15.0f);
     g.drawFittedText ("Made by Gouod Labs", getLocalBounds(), juce::Justification::bottomRight, 1);
 
-    g.fillRect(52, 235 - (lowGainSlider.getValue()/lowGainSlider.getMaximum()) * 122, 41, (lowGainSlider.getValue()/lowGainSlider.getMaximum()) * 122 );
-    g.fillRect(159, 235 - (lowFrequencySlider.getValue()/lowFrequencySlider.getMaximum()) * 122, 41, (lowFrequencySlider.getValue()/lowFrequencySlider.getMaximum()) * 122 );
-    g.fillRect(273, 235 - (highGainSlider.getValue()/highGainSlider.getMaximum()) * 122, 41, (highGainSlider.getValue()/highGainSlider.getMaximum()) * 122 );
-    g.fillRect(382, 235 - (highFrequencySlider.getValue()/highFrequencySlider.getMaximum()) * 122, 41, (highFrequencySlider.getValue()/highFrequencySlider.getMaximum()) * 122 );
+    // 0 1 2
+    //0
+    //1
+    //2
+
+    g.fillRect(48, 221 - (lowGainSlider.getValue()/lowGainSlider.getMaximum()) * 122, 39, (lowGainSlider.getValue()/lowGainSlider.getMaximum()) * 122 );
+    g.fillRect(144, 221 - (lowFrequencySlider.getValue()/lowFrequencySlider.getMaximum()) * 122, 39, (lowFrequencySlider.getValue()/lowFrequencySlider.getMaximum()) * 122 );
+    g.fillRect(292, 221 - (highGainSlider.getValue()/highGainSlider.getMaximum()) * 122, 39, (highGainSlider.getValue()/highGainSlider.getMaximum()) * 122 );
+    g.fillRect(388, 221 - (highFrequencySlider.getValue()/highFrequencySlider.getMaximum()) * 122, 39, (highFrequencySlider.getValue()/highFrequencySlider.getMaximum()) * 122 );
 }
 
 void GouodKickAudioProcessorEditor::resized()
@@ -96,14 +101,14 @@ void GouodKickAudioProcessorEditor::resized()
     const int dialHight = getHeight() - border - 100;
 
     
-    lowGainSlider.setBounds(46, 348, 48, 330);
-    lowFrequencySlider.setBounds(150, 348, 48, 330);
+    lowGainSlider.setBounds(43, 334, 48, 310);
+    lowFrequencySlider.setBounds(141, 334, 48, 310);
 
-    highGainSlider.setBounds(285, 348, 48, 330);
-    highFrequencySlider.setBounds(287 + 114 - 33, 348, 48, 330);
+    highGainSlider.setBounds(290, 336, 48, 310);
+    highFrequencySlider.setBounds(307 + 114 - 33, 334, 48, 310);
 
-    dryWetSlider.setBounds(195, 387, 90, 90);
-    gainSlider.setBounds(195, 540, 90, 90);
+    dryWetSlider.setBounds(195, 362, 90, 90);
+    gainSlider.setBounds(195, 515, 90, 90);
 }
 
 void GouodKickAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) {
@@ -111,7 +116,9 @@ void GouodKickAudioProcessorEditor::sliderValueChanged(juce::Slider* slider) {
         lowFrequencySlider.getValue(),
         highFrequencySlider.getValue(),
         lowGainSlider.getValue(),
-        highGainSlider.getValue()
+        highGainSlider.getValue(),
+        gainSlider.getValue(),
+        dryWetSlider.getValue()
     );
     repaint();
 }

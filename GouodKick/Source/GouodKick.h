@@ -19,6 +19,8 @@ public:
     void setHighFilterFactor(float filterFactor);
     void setLowGain(float gain);
     void setHighGain(float gain);
+    void setDryWet(int dw);
+    void setOutGain(float gain);
 
 private:
     int sampleRate;
@@ -36,6 +38,8 @@ private:
 
     float lowGain = 1.0f;
     float highGain = 1.0f;
+    float outGain = 1.0f;
+    float dryWet = 100;
     float lowFilterFactor = 1.0f;
     float highFilterFactor = 1.0f;
 

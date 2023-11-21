@@ -17,7 +17,11 @@
             file="Source/PluginProcessor.h"/>
     </GROUP>
     <GROUP id="{83AFE619-7F9B-5869-EC28-BBB9FB757DBF}" name="Resources">
+      <FILE id="HKGM9g" name="KICKTATOR_V6_BG.png" compile="0" resource="1"
+            file="KICKTATOR_V6_BG.png"/>
       <FILE id="yNZkf0" name="KNOB_V6.png" compile="0" resource="1" file="KNOB_V6.png"/>
+      <FILE id="t8022N" name="KICKTATOR_V5_BG.png" compile="0" resource="1"
+            file="KICKTATOR_V5_BG.png"/>
       <FILE id="mnLx1y" name="KICKTATOR_V2_BG.png" compile="0" resource="1"
             file="KICKTATOR_V2_BG.png"/>
       <FILE id="sPrAFF" name="KICKTATOR_V3_BG.png" compile="0" resource="1"
@@ -27,8 +31,12 @@
       <FILE id="BFz0U7" name="KNOB_V3.png" compile="0" resource="1" file="KNOB_V3.png"/>
       <FILE id="izUueh" name="KNOB_V4.png" compile="0" resource="1" file="KNOB_V4.png"/>
       <FILE id="NAThOp" name="KNOB_V5.png" compile="0" resource="1" file="KNOB_V5.png"/>
+      <FILE id="In90Yr" name="KNOB_V9.png" compile="0" resource="1" file="KNOB_V9.png"/>
       <FILE id="WXG4WJ" name="FADER_SHADOW.png" compile="0" resource="1"
             file="FADER_SHADOW.png"/>
+      <FILE id="NNqCBT" name="KNOB_V7.png" compile="0" resource="1" file="KNOB_V7.png"/>
+      <FILE id="uDYVUc" name="KNOB_V8.png" compile="0" resource="1" file="KNOB_V8.png"/>
+      <FILE id="RljdWp" name="KNOB_V10.png" compile="0" resource="1" file="KNOB_V10.png"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
