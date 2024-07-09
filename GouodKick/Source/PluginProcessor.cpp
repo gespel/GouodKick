@@ -19,7 +19,19 @@ GouodKickAudioProcessor::GouodKickAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
+        parameters(*this, nullptr, juce::Identifier("Kicktator"),
+            {
+                std::make_unique<juce::AudioParameterFloat>("gain",            // parameterID
+                                                             "Gain",            // parameter name
+                                                             0.0f,              // minimum value
+                                                             1.0f,              // maximum value
+                                                             0.5f),             // default value
+                std::make_unique<juce::AudioParameterBool>("invertPhase",      // parameterID
+                                                            "Invert Phase",     // parameter name
+                                                            false)              // default value
+            }
+        )
 #endif
 {
 }
