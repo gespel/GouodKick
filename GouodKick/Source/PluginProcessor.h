@@ -58,9 +58,10 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     void updateParameters(float lowFilterFactor, float highFilterFactor, float lowGain, float highGain, float gain, int dw);
+    GouodKick* gk;
+
 
 private:
-    GouodKick* gk;
     juce::AudioParameterFloat* gain;
     juce::AudioProcessorValueTreeState parameters;
     //==============================================================================

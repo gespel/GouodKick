@@ -22,14 +22,12 @@ GouodKickAudioProcessor::GouodKickAudioProcessor()
                        ),
         parameters(*this, nullptr, juce::Identifier("Kicktator"),
             {
-                std::make_unique<juce::AudioParameterFloat>("gain",            // parameterID
-                                                             "Gain",            // parameter name
-                                                             0.0f,              // minimum value
-                                                             1.0f,              // maximum value
-                                                             0.5f),             // default value
-                std::make_unique<juce::AudioParameterBool>("invertPhase",      // parameterID
-                                                            "Invert Phase",     // parameter name
-                                                            false)              // default value
+                std::make_unique<juce::AudioParameterFloat>("lowgain", "Low Gain", 0.0f, 100.0f, 0.5f),
+                std::make_unique<juce::AudioParameterFloat>("highgain", "High Gain", 0.0f, 100.0f, 0.5f),
+                std::make_unique<juce::AudioParameterFloat>("lowamount", "Low Amount", 0.0f, 3.0f, 0.5f),
+                std::make_unique<juce::AudioParameterFloat>("highamount", "High Amount", 0.0f, 2.0f, 0.5f),
+                std::make_unique<juce::AudioParameterFloat>("wet", "Dry Wet", 0.0f, 100.0f, 0.5f),
+                std::make_unique<juce::AudioParameterFloat>("gain", "Gain", 0.0f, 10.0f, 0.5f)
             }
         )
 #endif
@@ -106,6 +104,12 @@ void GouodKickAudioProcessor::changeProgramName (int index, const juce::String& 
 void GouodKickAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     this->gk = new GouodKick(sampleRate, samplesPerBlock);
+    this->gk->setHighFilterFactor(*parameters.getRawParameterValue ("highamount"));
+    this->gk->setLowFilterFactor(*parameters.getRawParameterValue ("lowamount"));
+    this->gk->setHighGain(*parameters.getRawParameterValue ("highgain"));
+    this->gk->setLowGain(*parameters.getRawParameterValue ("lowgain"));
+    this->gk->setDryWet(*parameters.getRawParameterValue ("wet"));
+    this->gk->setOutGain(*parameters.getRawParameterValue ("gain"));
 }
 
 void GouodKickAudioProcessor::releaseResources()

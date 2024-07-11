@@ -118,3 +118,22 @@ void GouodKick::setOutGain(float gain) {
 void GouodKick::setDryWet(int dw) {
     this->dryWet = dw;
 }
+
+float GouodKick::getLowFilterFactor() {
+    return lowFilterFactor;
+}
+float GouodKick::getHighFilterFactor() {
+    return highFilterFactor;
+}
+float GouodKick::getLowGain() {
+    return lowGain;
+}
+float GouodKick::getHighGain() {
+    return highGain;
+}
+float GouodKick::getDryWet() {
+    return dryWet;
+}
+float GouodKick::getOutGain() {
+    return outGain;
+}

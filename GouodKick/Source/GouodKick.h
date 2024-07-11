@@ -21,6 +21,12 @@ public:
     void setHighGain(float gain);
     void setDryWet(int dw);
     void setOutGain(float gain);
+    float getLowFilterFactor();
+    float getHighFilterFactor();
+    float getLowGain();
+    float getHighGain();
+    float getDryWet();
+    float getOutGain();
 
 private:
     int sampleRate;

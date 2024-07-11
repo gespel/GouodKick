@@ -23,7 +23,7 @@ GouodKickAudioProcessorEditor::GouodKickAudioProcessorEditor (GouodKickAudioProc
     highFrequencySlider.setRange(0.0, 2.0, 0.1);
     //highFrequencySlider.setTextValueSuffix(" High Part");
     highFrequencySlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
-    highFrequencySlider.setValue(1.0f);
+    highFrequencySlider.setValue(p.gk->getHighFilterFactor());
     highFrequencySlider.addListener(this);
     addAndMakeVisible(&highFrequencySlider);
 
@@ -31,7 +31,7 @@ GouodKickAudioProcessorEditor::GouodKickAudioProcessorEditor (GouodKickAudioProc
     lowFrequencySlider.setRange(0.0, 3.0, 0.1);
     //lowFrequencySlider.setTextValueSuffix(" Low Part");
     lowFrequencySlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
-    lowFrequencySlider.setValue(1.0f);
+    lowFrequencySlider.setValue(p.gk->getLowFilterFactor());
     lowFrequencySlider.addListener(this);
     addAndMakeVisible(&lowFrequencySlider);
 
@@ -39,7 +39,7 @@ GouodKickAudioProcessorEditor::GouodKickAudioProcessorEditor (GouodKickAudioProc
     lowGainSlider.setRange(0.0, 100.0, 0.1);
     //lowGainSlider.setTextValueSuffix(" Low Gain");
     lowGainSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
-    lowGainSlider.setValue(1.0f);
+    lowGainSlider.setValue(p.gk->getLowGain());
     lowGainSlider.addListener(this);
     addAndMakeVisible(&lowGainSlider);
 
@@ -47,20 +47,20 @@ GouodKickAudioProcessorEditor::GouodKickAudioProcessorEditor (GouodKickAudioProc
     highGainSlider.setRange(0.0, 100.0, 0.1);
     //highGainSlider.setTextValueSuffix(" High Gain");
     highGainSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
-    highGainSlider.setValue(1.0f);
+    highGainSlider.setValue(p.gk->getHighGain());
     highGainSlider.addListener(this);
     addAndMakeVisible(&highGainSlider);
 
     dryWetSlider.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     dryWetSlider.setRange(0.0, 100.0, 1.0);
-    dryWetSlider.setValue(50.0f);
+    dryWetSlider.setValue(p.gk->getDryWet());
     dryWetSlider.addListener(this);
     dryWetSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
     addAndMakeVisible(&dryWetSlider);
 
     gainSlider.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainSlider.setRange(0.0, 10.0, 1.0);
-    gainSlider.setValue(1.0f);
+    gainSlider.setValue(p.gk->getOutGain());
     gainSlider.addListener(this);
     gainSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
     addAndMakeVisible(&gainSlider);
@@ -96,6 +96,8 @@ void GouodKickAudioProcessorEditor::paint (juce::Graphics& g)
 
 void GouodKickAudioProcessorEditor::resized()
 {
+    highFrequencySlider.setValue(audioProcessor.gk->getHighFilterFactor());
+
     const int border = 20;
     const int dialWidth = getWidth() / 2 - border;
     const int dialHight = getHeight() - border - 100;
