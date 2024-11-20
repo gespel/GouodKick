@@ -62,8 +62,14 @@ public:
 
 
 private:
-    juce::AudioParameterFloat* gain;
+    juce::AudioParameterFloat* lowgain;
     juce::AudioProcessorValueTreeState parameters;
+    std::atomic<float>* gainParameter  = nullptr;
+    std::atomic<float>* lowGainParameter = nullptr;
+    std::atomic<float>* highGainParameter = nullptr;
+    std::atomic<float>* dryWet = nullptr;
+    std::atomic<float>* lFF = nullptr;
+    std::atomic<float>* hFF = nullptr;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GouodKickAudioProcessor)
 };

@@ -104,13 +104,20 @@ void GouodKickAudioProcessor::changeProgramName (int index, const juce::String& 
 //==============================================================================
 void GouodKickAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
+    gainParameter = parameters.getRawParameterValue("gain");
+    lowGainParameter = parameters.getRawParameterValue("lowgain");
+    highGainParameter = parameters.getRawParameterValue("highgain");
+    dryWet = parameters.getRawParameterValue("wet");
+    lFF = parameters.getRawParameterValue("lowamount");
+    hFF = parameters.getRawParameterValue("highamount");
+
     this->gk = new GouodKick(sampleRate, samplesPerBlock);
-    this->gk->setHighFilterFactor(*parameters.getRawParameterValue ("highamount"));
-    this->gk->setLowFilterFactor(*parameters.getRawParameterValue ("lowamount"));
-    this->gk->setHighGain(*parameters.getRawParameterValue ("highgain"));
-    this->gk->setLowGain(*parameters.getRawParameterValue ("lowgain"));
-    this->gk->setDryWet(*parameters.getRawParameterValue ("wet"));
-    this->gk->setOutGain(*parameters.getRawParameterValue ("gain"));
+    this->gk->setHighFilterFactor(*hFF);
+    this->gk->setLowFilterFactor(*lFF);
+    this->gk->setHighGain(*highGainParameter);
+    this->gk->setLowGain(*lowGainParameter);
+    this->gk->setDryWet(*dryWet);
+    this->gk->setOutGain(*gainParameter);
 }
 
 void GouodKickAudioProcessor::releaseResources()
@@ -165,7 +172,7 @@ bool GouodKickAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* GouodKickAudioProcessor::createEditor()
 {
-    return new GouodKickAudioProcessorEditor (*this);
+    return new GouodKickAudioProcessorEditor (*this, parameters);
 }
 
 //==============================================================================
@@ -188,10 +195,11 @@ void GouodKickAudioProcessor::setStateInformation (const void* data, int sizeInB
 void GouodKickAudioProcessor::updateParameters(float lowFilterFactor, float highFilterFactor, float lowGain, float highGain, float gain, int dw) {
     gk->setLowFilterFactor(lowFilterFactor);
     gk->setHighFilterFactor(highFilterFactor);
-    gk->setLowGain(lowGain);
+    gk->setLowGain(*gainParameter);
     gk->setHighGain(highGain);
     gk->setOutGain(gain);
     gk->setDryWet(dw);
+
 }
 
 

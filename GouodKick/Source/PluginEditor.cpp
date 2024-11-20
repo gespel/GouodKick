@@ -11,8 +11,8 @@
 
 
 //==============================================================================
-GouodKickAudioProcessorEditor::GouodKickAudioProcessorEditor (GouodKickAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+GouodKickAudioProcessorEditor::GouodKickAudioProcessorEditor (GouodKickAudioProcessor& p, juce::AudioProcessorValueTreeState& vts)
+    : AudioProcessorEditor (&p), audioProcessor (p), valueTreeState (vts)
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -23,47 +23,53 @@ GouodKickAudioProcessorEditor::GouodKickAudioProcessorEditor (GouodKickAudioProc
     highFrequencySlider.setRange(0.0, 2.0, 0.1);
     //highFrequencySlider.setTextValueSuffix(" High Part");
     highFrequencySlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
-    highFrequencySlider.setValue(p.gk->getHighFilterFactor());
+    //highFrequencySlider.setValue(p.gk->getHighFilterFactor());
     highFrequencySlider.addListener(this);
     addAndMakeVisible(&highFrequencySlider);
+    highFilterFactorAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(valueTreeState, "highamount", highFrequencySlider));
 
     lowFrequencySlider.setSliderStyle(juce::Slider::SliderStyle::LinearBarVertical);
     lowFrequencySlider.setRange(0.0, 3.0, 0.1);
     //lowFrequencySlider.setTextValueSuffix(" Low Part");
     lowFrequencySlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
-    lowFrequencySlider.setValue(p.gk->getLowFilterFactor());
+    //lowFrequencySlider.setValue(p.gk->getLowFilterFactor());
     lowFrequencySlider.addListener(this);
     addAndMakeVisible(&lowFrequencySlider);
+    lowFilterFactorAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(valueTreeState, "lowamount", lowFrequencySlider));
 
     lowGainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearBarVertical);
     lowGainSlider.setRange(0.0, 100.0, 0.1);
     //lowGainSlider.setTextValueSuffix(" Low Gain");
     lowGainSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
-    lowGainSlider.setValue(p.gk->getLowGain());
+    //lowGainSlider.setValue(p.gk->getLowGain());
     lowGainSlider.addListener(this);
-    addAndMakeVisible(&lowGainSlider);
+    addAndMakeVisible(lowGainSlider);
+    lowGainAttachment.reset (new juce::AudioProcessorValueTreeState::SliderAttachment (valueTreeState, "lowgain", lowGainSlider));
 
     highGainSlider.setSliderStyle(juce::Slider::SliderStyle::LinearBarVertical);
     highGainSlider.setRange(0.0, 100.0, 0.1);
     //highGainSlider.setTextValueSuffix(" High Gain");
     highGainSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
-    highGainSlider.setValue(p.gk->getHighGain());
+    //highGainSlider.setValue(p.gk->getHighGain());
     highGainSlider.addListener(this);
     addAndMakeVisible(&highGainSlider);
+    highGainAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(valueTreeState, "highgain", highGainSlider));
 
     dryWetSlider.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     dryWetSlider.setRange(0.0, 100.0, 1.0);
-    dryWetSlider.setValue(p.gk->getDryWet());
+    //dryWetSlider.setValue(p.gk->getDryWet());
     dryWetSlider.addListener(this);
     dryWetSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
     addAndMakeVisible(&dryWetSlider);
+    dryWetAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(valueTreeState, "wet", dryWetSlider));
 
     gainSlider.setSliderStyle(Slider::SliderStyle::RotaryHorizontalVerticalDrag);
     gainSlider.setRange(0.0, 10.0, 1.0);
-    gainSlider.setValue(p.gk->getOutGain());
+    //gainSlider.setValue(p.gk->getOutGain());
     gainSlider.addListener(this);
     gainSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
     addAndMakeVisible(&gainSlider);
+    gainAttachment.reset(new juce::AudioProcessorValueTreeState::SliderAttachment(valueTreeState, "gain", gainSlider));
 
 }
 

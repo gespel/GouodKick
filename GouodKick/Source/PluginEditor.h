@@ -72,7 +72,7 @@ private:
 class GouodKickAudioProcessorEditor  : public juce::AudioProcessorEditor,public Slider::Listener
 {
 public:
-    GouodKickAudioProcessorEditor (GouodKickAudioProcessor&);
+    GouodKickAudioProcessorEditor (GouodKickAudioProcessor&, juce::AudioProcessorValueTreeState&);
     ~GouodKickAudioProcessorEditor() override;
 
     //==============================================================================
@@ -94,6 +94,14 @@ private:
     // access the processor object that created it.
     GouodKickAudioProcessor& audioProcessor;
     GouodKickLookAndFeel gouodKickLookAndFeel;
+    juce::AudioProcessorValueTreeState& valueTreeState;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> gainAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> lowGainAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> highGainAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> lowFilterFactorAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> highFilterFactorAttachment;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> dryWetAttachment;
+    
 
     void sliderValueChanged(juce::Slider* slider) override;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (GouodKickAudioProcessorEditor)
