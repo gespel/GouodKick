@@ -195,7 +195,7 @@ void GouodKickAudioProcessor::setStateInformation (const void* data, int sizeInB
 void GouodKickAudioProcessor::updateParameters(float lowFilterFactor, float highFilterFactor, float lowGain, float highGain, float gain, int dw) {
     gk->setLowFilterFactor(lowFilterFactor);
     gk->setHighFilterFactor(highFilterFactor);
-    gk->setLowGain(*gainParameter);
+    gk->setLowGain(lowGain);
     gk->setHighGain(highGain);
     gk->setOutGain(gain);
     gk->setDryWet(dw);
